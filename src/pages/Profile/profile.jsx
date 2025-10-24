@@ -3,11 +3,8 @@ import { Upload } from "lucide-react";
 import InputField from "../../components/Reusables/inputFields";
 import { userAPI, getUser, authAPI } from "../../services/api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const navigate = useNavigate();
-
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -113,30 +110,11 @@ const Profile = () => {
     }
   };
 
-  const handleLogout = (e) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    navigate("/login", { replace: true });
-  };
-
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center py-10 px-4">
       <div className="bg-white w-full max-w-2xl rounded-xl shadow-lg p-8">
         <div className="flex items-center justify-between mb-6 border-b pb-3">
           <h1 className="text-2xl font-semibold">My Profile</h1>
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="text-red-500 hover:text-red-700 font-medium text-sm transition-colors"
-          >
-            Logout
-          </button>
         </div>
 
         <form onSubmit={handleSave} className="space-y-4">
@@ -168,7 +146,7 @@ const Profile = () => {
                 name="staffId"
                 value={profile.staffId}
                 onChange={handleChange}
-                readOnly
+                // readOnly
               />
             </div>
 

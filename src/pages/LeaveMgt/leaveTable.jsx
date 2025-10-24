@@ -78,92 +78,93 @@ const LeaveTable = () => {
   }
 
   return (
-    <div className="mt-8 bg-white rounded-xl shadow-md p-6 overflow-x-auto">
-      <div className="flex items-center justify-between mb-4">
+    <>
+      <div className="flex items-center justify-between mb-2 mt-6">
         <h2 className="text-lg font-bold text-gray-700">Leave History</h2>
         <ModalTrigger onOpen={() => modalRef.current.open()} />
       </div>
-
-      <table className="min-w-full text-sm text-left border-collapse">
-        <thead>
-          <tr className="border-b border-gray-200 bg-gray-50 text-gray-600">
-            <th className="py-3 px-4">Leave Type</th>
-            <th className="py-3 px-4">From</th>
-            <th className="py-3 px-4">To</th>
-            <th className="py-3 px-4">No. of Days</th>
-            <th className="py-3 px-4">Status</th>
-            <th className="py-3 px-4 text-center">Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {sortedLeaves.length === 0 ? (
-            <tr>
-              <td
-                colSpan="6"
-                className="text-center py-8 text-gray-400 text-sm italic"
-              >
-                No leaves have been taken yet. Once you apply, your leave
-                history will appear here.
-              </td>
+      <div className="mt-8 bg-white rounded-xl shadow-md p-6 overflow-x-auto">
+        <table className="min-w-full text-sm text-left border-collapse mt-4">
+          <thead>
+            <tr className="border-b border-gray-200 bg-gray-50 text-gray-600 mb-8">
+              <th classmbame="py-3 px-4">Leave Type</th>
+              <th className="py-3 px-4">From</th>
+              <th className="py-3 px-4">To</th>
+              <th className="py-3 px-4">No. of Days</th>
+              <th className="py-3 px-4">Status</th>
+              <th className="py-3 px-4 text-center">Action</th>
             </tr>
-          ) : (
-            sortedLeaves.map((leave) => (
-              <tr
-                key={leave.id}
-                className="border-b border-gray-100 hover:bg-gray-50 transition"
-              >
-                <td className="py-3 px-4 font-medium text-gray-700">
-                  {leave.leaveType}
-                  {leave.otherLeaveType && (
-                    <span className="text-xs text-gray-500">
-                      {" "}
-                      ({leave.otherLeaveType})
-                    </span>
-                  )}
-                </td>
-                <td className="py-3 px-4">{formatDate(leave.fromDate)}</td>
-                <td className="py-3 px-4">{formatDate(leave.toDate)}</td>
-                <td className="py-3 px-4">{leave.totalDays}</td>
+          </thead>
 
+          <tbody>
+            {sortedLeaves.length === 0 ? (
+              <tr>
                 <td
-                  className={`py-3 px-4 font-semibold ${getStatusColor(
-                    leave.status
-                  )}`}
+                  colSpan="6"
+                  className="text-center py-8 text-gray-400 text-sm italic"
                 >
-                  {leave.status}
-                  {leave.status === "Pending" && (
-                    <span className="text-xs text-gray-500">
-                      {" "}
-                      (Stage {leave.stage})
-                    </span>
-                  )}
-                </td>
-
-                <td className="py-3 px-4 text-center">
-                  {leave.isEditable ? (
-                    <button
-                      onClick={() => modalRef.current.open(leave)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-xs transition"
-                    >
-                      Edit
-                    </button>
-                  ) : (
-                    <button
-                      disabled
-                      className="bg-gray-200 text-gray-500 px-3 py-1 rounded-md text-xs cursor-not-allowed"
-                    >
-                      Locked
-                    </button>
-                  )}
+                  No leaves have been taken yet. Once you apply, your leave
+                  history will appear here.
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-      <Modal ref={modalRef} onLeaveCreated={handleLeaveCreated} />
-    </div>
+            ) : (
+              sortedLeaves.map((leave) => (
+                <tr
+                  key={leave.id}
+                  className="border-b border-gray-100 hover:bg-gray-50 transition"
+                >
+                  <td className="py-3 px-4 font-medium text-gray-700">
+                    {leave.leaveType}
+                    {leave.otherLeaveType && (
+                      <span className="text-xs text-gray-500">
+                        {" "}
+                        ({leave.otherLeaveType})
+                      </span>
+                    )}
+                  </td>
+                  <td className="py-3 px-4">{formatDate(leave.fromDate)}</td>
+                  <td className="py-3 px-4">{formatDate(leave.toDate)}</td>
+                  <td className="py-3 px-4">{leave.totalDays}</td>
+
+                  <td
+                    className={`py-3 px-4 font-semibold ${getStatusColor(
+                      leave.status
+                    )}`}
+                  >
+                    {leave.status}
+                    {leave.status === "Pending" && (
+                      <span className="text-xs text-gray-500">
+                        {" "}
+                        (Stage {leave.stage})
+                      </span>
+                    )}
+                  </td>
+
+                  <td className="py-3 px-4 text-center">
+                    {leave.isEditable ? (
+                      <button
+                        onClick={() => modalRef.current.open(leave)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-xs transition"
+                      >
+                        Edit
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="bg-gray-200 text-gray-500 px-3 py-1 rounded-md text-xs cursor-not-allowed"
+                      >
+                        Locked
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+        <Modal ref={modalRef} onLeaveCreated={handleLeaveCreated} />
+      </div>
+    </>
   );
 };
 
