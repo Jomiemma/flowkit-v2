@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DashCards from "./dashCards";
 import DashGraph from "./dashGraph";
 import ProgressBar from "./progressBar";
-import { leaveAPI } from "../../services/api";
+import { leaveAPI } from "./../../../services/api";
 
 const Dashboard = () => {
   const [latestLeave, setLatestLeave] = useState(null);
@@ -12,13 +12,13 @@ const Dashboard = () => {
     const fetchLatestLeave = async () => {
       try {
         const response = await leaveAPI.getMyLeaves();
-        
+
         if (response.success && response.leaves && response.leaves.length > 0) {
           // Get the most recent pending leave
-          const pendingLeaves = response.leaves.filter(leave => 
-            leave.status === "Pending" || leave.status === "Approved"
+          const pendingLeaves = response.leaves.filter(
+            (leave) => leave.status === "Pending" || leave.status === "Approved"
           );
-          
+
           if (pendingLeaves.length > 0) {
             setLatestLeave(pendingLeaves[0]);
           }
@@ -40,11 +40,13 @@ const Dashboard = () => {
     <div className="p-4 ">
       {/* leave stats */}
       <DashCards />
-      
+
       {/* conditional rendering for leave progress */}
       {loading ? (
         <div className="flex flex-col items-center justify-center py-12">
-          <div className="animate-pulse text-gray-400">Loading leave status...</div>
+          <div className="animate-pulse text-gray-400">
+            Loading leave status...
+          </div>
         </div>
       ) : !latestLeave || currentStage === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-gray-500">
@@ -56,7 +58,7 @@ const Dashboard = () => {
       ) : (
         <ProgressBar stages={stages} currentStage={currentStage} />
       )}
-      
+
       {/* graph */}
       <DashGraph />
     </div>

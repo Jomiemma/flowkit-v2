@@ -1,11 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/dashboard";
-import Profile from "./pages/Profile/profile";
-import LeaveMgt from "./pages/LeaveMgt/leaveMgt";
-import MainLayout from "./layout/mainLayout";
+import Dashboard from "./pages/Employee/Dashboard/dashboard";
+import Profile from "./pages/Employee/Profile/profile";
+import LeaveMgt from "./pages/Employee/LeaveMgt/leaveMgt";
+import MainLayout from "./layouts/mainLayout";
 import Login from "./pages/auth/Login/Login";
 import Signup from "./pages/auth/Signup/Signup";
+// Admin pages
+import AdminDashboard from "./pages/Admin/Dashboard/dashboard";
+import LeaveManagement from "./pages/Admin/LeaveManagement/leaveManagement";
 // import ForgotPword from "./pages/auth/ForgotPassword/forgotPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
@@ -30,6 +33,29 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          {/* ADMIN ROUTES */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                {/* <AdminLayout> */}
+                <AdminDashboard />
+                {/* </AdminLayout> */}
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/leave-management"
+            element={
+              <ProtectedRoute>
+                {/* <AdminLayout> */}
+                <LeaveManagement />
+                {/* </AdminLayout> */}
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/profile"
             element={

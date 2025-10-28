@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { dashboardAPI } from "../../services/api";
+import { dashboardAPI } from "./../../../services/api";
 import { toast } from "react-toastify";
 
 function DashGraph() {

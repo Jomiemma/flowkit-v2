@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { dashboardAPI, getUser } from "../../services/api";
+import { dashboardAPI, getUser } from "./../../../services/api";
 import { toast } from "react-toastify";
 
 const DashCards = () => {

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import ModalTrigger from "./modalTrigger";
 import Modal from "./modal";
-import { leaveAPI } from "../../services/api";
+import { leaveAPI } from "./../../../services/api";
 import { toast } from "react-toastify";
 
 const LeaveTable = () => {

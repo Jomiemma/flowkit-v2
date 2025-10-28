@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Upload } from "lucide-react";
-import InputField from "../../components/Reusables/inputFields";
-import { userAPI, getUser, authAPI } from "../../services/api";
+import InputField from "./../../../components/Reusables/inputFields";
+import { userAPI, getUser, authAPI } from "./../../../services/api";
 import { toast } from "react-toastify";
 
 const Profile = () => {

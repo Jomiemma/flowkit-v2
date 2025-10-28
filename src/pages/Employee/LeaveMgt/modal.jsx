@@ -5,8 +5,8 @@ import React, {
   useEffect,
 } from "react";
 import { X } from "lucide-react";
-import InputField from "../../components/Reusables/inputFields";
-import { leaveAPI, userAPI, getUser } from "../../services/api";
+import InputField from "./../../../components/Reusables/inputFields";
+import { leaveAPI, userAPI, getUser } from "./../../../services/api";
 import { toast } from "react-toastify";
 
 const Modal = forwardRef(({ onLeaveCreated }, ref) => {
