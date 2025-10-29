@@ -1,22 +1,34 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiHome, FiLogOut } from "react-icons/fi";
-import { Calendar, User } from "lucide-react";
+import { User, Calendar } from "lucide-react";
 
-const Sidebar = () => {
+const Sidebar = ({ role = "employee" }) => {
   const navigate = useNavigate();
-  
-  const navItems = [
+
+  const employeeNav = [
     { name: "Dashboard", icon: <FiHome size={20} />, path: "/dashboard" },
     { name: "Leave Management", icon: <Calendar size={20} />, path: "/leave" },
     { name: "Profile", icon: <User size={20} />, path: "/profile" },
   ];
 
+  const adminNav = [
+    { name: "Dashboard", icon: <FiHome size={20} />, path: "/admin" },
+    {
+      name: "Leave Management",
+      icon: <Calendar size={20} />,
+      path: "/admin/leave-management",
+    },
+    { name: "Profile", icon: <User size={20} />, path: "/admin/profile" },
+  ];
+
+  const navItems = role === "admin" ? adminNav : employeeNav;
+
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login', { replace: true });
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login", { replace: true });
   };
 
   return (

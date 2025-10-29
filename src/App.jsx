@@ -9,6 +9,7 @@ import Signup from "./pages/auth/Signup/Signup";
 // Admin pages
 import AdminDashboard from "./pages/Admin/Dashboard/dashboard";
 import LeaveManagement from "./pages/Admin/LeaveManagement/leaveManagement";
+import AdminLayout from "./layouts/adminLayout";
 // import ForgotPword from "./pages/auth/ForgotPassword/forgotPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
@@ -35,12 +36,12 @@ const App = () => {
           />
           {/* ADMIN ROUTES */}
           <Route
-            path="/admin/dashboard"
+            path="/admin"
             element={
               <ProtectedRoute>
-                {/* <AdminLayout> */}
-                <AdminDashboard />
-                {/* </AdminLayout> */}
+                <AdminLayout>
+                  <AdminDashboard />
+                </AdminLayout>
               </ProtectedRoute>
             }
           />
@@ -49,9 +50,9 @@ const App = () => {
             path="/admin/leave-management"
             element={
               <ProtectedRoute>
-                {/* <AdminLayout> */}
-                <LeaveManagement />
-                {/* </AdminLayout> */}
+                <AdminLayout>
+                  <LeaveManagement />
+                </AdminLayout>
               </ProtectedRoute>
             }
           />
