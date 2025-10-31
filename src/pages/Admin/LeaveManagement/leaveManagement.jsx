@@ -3,7 +3,7 @@ import React from "react";
 function LeaveManagement() {
   return (
     <div>
-      <h1>Leave Management</h1>
+      <h1>Leave Applications</h1>
     </div>
   );
 }

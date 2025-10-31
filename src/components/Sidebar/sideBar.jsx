@@ -15,9 +15,9 @@ const Sidebar = ({ role = "employee" }) => {
   const adminNav = [
     { name: "Dashboard", icon: <FiHome size={20} />, path: "/admin" },
     {
-      name: "Leave Management",
+      name: "Leave Applications",
       icon: <Calendar size={20} />,
-      path: "/admin/leave-management",
+      path: "/admin/leave-applications",
     },
     { name: "Profile", icon: <User size={20} />, path: "/admin/profile" },
   ];
@@ -32,7 +32,7 @@ const Sidebar = ({ role = "employee" }) => {
   };
 
   return (
-    <div className="w-[220px] h-screen bg-[#1677FF] text-white p-4 flex flex-col">
+    <div className="w-[220px] h-screen bg-blue-600 text-white p-4 flex flex-col">
       <h2 className="text-xl font-bold mb-6">FlowKit</h2>
       <nav className="flex flex-col space-y-4">
         {navItems.map((item) => (
@@ -41,8 +41,8 @@ const Sidebar = ({ role = "employee" }) => {
             to={item.path}
             end
             className={({ isActive }) =>
-              `flex items-center gap-3 p-2 rounded hover:bg-gray-700 transition ${
-                isActive ? "bg-gray-700" : ""
+              `flex items-center gap-3 p-2 rounded hover:bg-blue-500 transition ${
+                isActive ? "bg-white/20" : ""
               }`
             }
           >

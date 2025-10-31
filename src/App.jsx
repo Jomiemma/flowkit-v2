@@ -47,7 +47,7 @@ const App = () => {
           />
 
           <Route
-            path="/admin/leave-management"
+            path="/admin/leave-applications"
             element={
               <ProtectedRoute>
                 <AdminLayout>
