@@ -26,9 +26,9 @@ const Sidebar = ({ role = "employee" }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login", { replace: true });
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("user");
+    navigate("/admin", { replace: true });
   };
 
   return (
