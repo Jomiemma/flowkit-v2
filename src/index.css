@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logpage {
+  background: #dcdce6;
+  background-image: url("./assets/Background.png");
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
