@@ -12,7 +12,23 @@ const Topbar = ({ role = "employee" }) => {
     return `${firstInitial}${lastInitial}`.toUpperCase();
   };
 
-  const profileLink = role === "admin" ? "/admin/profile" : "/profile";
+  // Get profile link based on role
+  const getProfileLink = () => {
+    switch (role) {
+      case "admin":
+        return "/admin/profile";
+      case "hod":
+        return "/hod/profile";
+      case "hr":
+        return "/hr/profile";
+      case "ged":
+        return "/ged/profile";
+      default:
+        return "/profile";
+    }
+  };
+
+  const profileLink = getProfileLink();
   const title = role === "admin" ? "Admin Panel" : "FlowKit";
 
   return (

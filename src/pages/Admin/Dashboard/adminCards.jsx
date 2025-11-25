@@ -52,7 +52,7 @@ function AdminCards() {
               nameKey="name"
               cx="50%"
               cy="50%"
-              overRadius={100}
+              outerRadius={100}
               label
             >
               {pieData.map((entry, index) => (

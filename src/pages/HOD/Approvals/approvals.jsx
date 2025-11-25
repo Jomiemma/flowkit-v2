@@ -78,10 +78,10 @@ function HODApprovals() {
       const action = newStatus === "Approved" ? "approve" : "reject";
       
       if (action === "approve") {
-        await hodAPI.approve(id, "Approved by HOD");
+        await hodAPI.approveLeave(id, "Approved by HOD");
         toast.success("Leave request approved successfully!");
       } else {
-        await hodAPI.reject(id, "Rejected by HOD");
+        await hodAPI.rejectLeave(id, "Rejected by HOD");
         toast.error("Leave request rejected");
       }
 

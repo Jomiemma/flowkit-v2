@@ -61,10 +61,10 @@ function HRApprovals() {
       const action = newStatus === "Approved" ? "approve" : "reject";
       
       if (action === "approve") {
-        await hrAPI.approve(id, "Approved by HR");
+        await hrAPI.approveLeave(id, "Approved by HR");
         toast.success("Leave request approved successfully!");
       } else {
-        await hrAPI.reject(id, "Rejected by HR");
+        await hrAPI.rejectLeave(id, "Rejected by HR");
         toast.error("Leave request rejected");
       }
 

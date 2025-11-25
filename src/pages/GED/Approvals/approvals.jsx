@@ -61,10 +61,10 @@ function GEDApprovals() {
       const action = newStatus === "Approved" ? "approve" : "reject";
       
       if (action === "approve") {
-        await gedAPI.approve(id, "Final approval by GED");
+        await gedAPI.approveLeave(id, "Final approval by GED");
         toast.success("Leave request approved successfully! (Final Approval)");
       } else {
-        await gedAPI.reject(id, "Rejected by GED");
+        await gedAPI.rejectLeave(id, "Rejected by GED");
         toast.error("Leave request rejected");
       }
 

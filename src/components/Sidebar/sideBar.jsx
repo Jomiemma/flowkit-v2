@@ -19,16 +19,50 @@ const Sidebar = ({ role = "employee" }) => {
       icon: <Calendar size={20} />,
       path: "/admin/leave-requests",
     },
-    // { name: "Profile", icon: <User size={20} />, path: "/admin/profile" },
+    { name: "Profile", icon: <User size={20} />, path: "/admin/profile" },
   ];
 
-  const navItems = role === "admin" ? adminNav : employeeNav;
+  const hodNav = [
+    { name: "Dashboard", icon: <FiHome size={20} />, path: "/hod" },
+    {
+      name: "Leave Approvals",
+      icon: <Calendar size={20} />,
+      path: "/hod/approvals",
+    },
+    { name: "Profile", icon: <User size={20} />, path: "/hod/profile" },
+  ];
+
+  const hrNav = [
+    { name: "Dashboard", icon: <FiHome size={20} />, path: "/hr" },
+    {
+      name: "Leave Approvals",
+      icon: <Calendar size={20} />,
+      path: "/hr/approvals",
+    },
+    { name: "Profile", icon: <User size={20} />, path: "/hr/profile" },
+  ];
+
+  const gedNav = [
+    { name: "Dashboard", icon: <FiHome size={20} />, path: "/ged" },
+    {
+      name: "Leave Approvals",
+      icon: <Calendar size={20} />,
+      path: "/ged/approvals",
+    },
+    { name: "Profile", icon: <User size={20} />, path: "/ged/profile" },
+  ];
+
+  let navItems = employeeNav;
+  if (role === "admin") navItems = adminNav;
+  else if (role === "hod") navItems = hodNav;
+  else if (role === "hr") navItems = hrNav;
+  else if (role === "ged") navItems = gedNav;
 
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/admin", { replace: true });
+    navigate("/login", { replace: true });
   };
 
   return (

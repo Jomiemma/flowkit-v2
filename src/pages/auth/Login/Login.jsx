@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../../components/Reusables/inputFields";
 import { toast } from "react-toastify";
-import { authAPI, isAuthenticated } from "../../../services/api";
+import { authAPI, isAuthenticated, getUser } from "../../../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,7 +15,20 @@ function Login() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated()) {
-      navigate("/dashboard", { replace: true });
+      const user = getUser();
+      const userRole = user?.role;
+      
+      if (userRole === "admin") {
+        navigate("/admin", { replace: true });
+      } else if (userRole === "hod") {
+        navigate("/hod", { replace: true });
+      } else if (userRole === "hr") {
+        navigate("/hr", { replace: true });
+      } else if (userRole === "ged") {
+        navigate("/ged", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
     }
   }, [navigate]);
 
@@ -42,8 +55,22 @@ function Login() {
 
       if (response.success) {
         toast.success("Login successful! Welcome back!");
-        // Use replace to clear login page from history
-        navigate("/dashboard", { replace: true });
+        
+        // Get user role and redirect to role-specific dashboard
+        const userRole = response.user?.role;
+        
+        if (userRole === "admin") {
+          navigate("/admin", { replace: true });
+        } else if (userRole === "hod") {
+          navigate("/hod", { replace: true });
+        } else if (userRole === "hr") {
+          navigate("/hr", { replace: true });
+        } else if (userRole === "ged") {
+          navigate("/ged", { replace: true });
+        } else {
+          // Regular employees go to employee dashboard
+          navigate("/dashboard", { replace: true });
+        }
       }
     } catch (error) {
       toast.error(

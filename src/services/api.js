@@ -1,9 +1,17 @@
 // API Configuration and Base URL
-// Use the host's IP address when accessed from network, localhost when local
-const getApiBaseUrl =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// Automatically use the same host IP that the frontend is accessed from
+const getApiBaseUrl = () => {
+  // If environment variable is set, use it
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  
+  // Otherwise, use the current host (works for both localhost and network IP)
+  const currentHost = window.location.hostname;
+  return `http://${currentHost}:5000/api`;
+};
 
-const API_BASE_URL = getApiBaseUrl;
+const API_BASE_URL = getApiBaseUrl();
 
 // Helper function to get auth token
 export const getToken = () => {
@@ -212,9 +220,87 @@ export const dashboardAPI = {
   },
 };
 
+// HOD API calls
+export const hodAPI = {
+  getDashboardStats: async () => {
+    return await apiFetch("/hod/dashboard/stats");
+  },
+
+  getLeaves: async () => {
+    return await apiFetch("/hod/leaves");
+  },
+
+  approveLeave: async (id, comment = "") => {
+    return await apiFetch(`/hod/leaves/${id}/approve`, {
+      method: "PUT",
+      body: JSON.stringify({ comment }),
+    });
+  },
+
+  rejectLeave: async (id, reason) => {
+    return await apiFetch(`/hod/leaves/${id}/reject`, {
+      method: "PUT",
+      body: JSON.stringify({ reason }),
+    });
+  },
+};
+
+// HR API calls
+export const hrAPI = {
+  getDashboardStats: async () => {
+    return await apiFetch("/hr/dashboard/stats");
+  },
+
+  getLeaves: async () => {
+    return await apiFetch("/hr/leaves");
+  },
+
+  approveLeave: async (id, comment = "") => {
+    return await apiFetch(`/hr/leaves/${id}/approve`, {
+      method: "PUT",
+      body: JSON.stringify({ comment }),
+    });
+  },
+
+  rejectLeave: async (id, reason) => {
+    return await apiFetch(`/hr/leaves/${id}/reject`, {
+      method: "PUT",
+      body: JSON.stringify({ reason }),
+    });
+  },
+};
+
+// GED API calls
+export const gedAPI = {
+  getDashboardStats: async () => {
+    return await apiFetch("/ged/dashboard/stats");
+  },
+
+  getLeaves: async () => {
+    return await apiFetch("/ged/leaves");
+  },
+
+  approveLeave: async (id, comment = "") => {
+    return await apiFetch(`/ged/leaves/${id}/approve`, {
+      method: "PUT",
+      body: JSON.stringify({ comment }),
+    });
+  },
+
+  rejectLeave: async (id, reason) => {
+    return await apiFetch(`/ged/leaves/${id}/reject`, {
+      method: "PUT",
+      body: JSON.stringify({ reason }),
+    });
+  },
+};
+
 export default {
   auth: authAPI,
   user: userAPI,
   leave: leaveAPI,
   dashboard: dashboardAPI,
+  hod: hodAPI,
+  hr: hrAPI,
+  ged: gedAPI,
 };

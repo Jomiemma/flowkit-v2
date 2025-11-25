@@ -90,9 +90,9 @@ func main() {
 		port = "5000"
 	}
 
-	// Start server
-	log.Printf("🚀 Server running on port %s", port)
-	if err := r.Run(":" + port); err != nil {
+	// Start server - bind to 0.0.0.0 to allow both localhost and network access
+	log.Printf("🚀 Server running on 0.0.0.0:%s (accessible from localhost and network)", port)
+	if err := r.Run("0.0.0.0:" + port); err != nil {
 		log.Fatal("Failed to start server:", err)
 	}
 }

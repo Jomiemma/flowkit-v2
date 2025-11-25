@@ -104,6 +104,7 @@ func HODApproveLeave(c *gin.Context) {
 			"hodApprovalDate":    now,
 			"hodApprovalComment": req.Comments,
 			"hodApprover":        userObjID,
+			"stage":              2, // Move to HR stage after HOD approval
 			"updatedAt":          now,
 		},
 	}
@@ -290,6 +291,7 @@ func HRApproveLeave(c *gin.Context) {
 			"hrApprovalDate":    now,
 			"hrApprovalComment": req.Comments,
 			"hrApprover":        userObjID,
+			"stage":             3, // Move to GED stage after HR approval
 			"updatedAt":         now,
 		},
 	}
@@ -458,6 +460,7 @@ func GEDApproveLeave(c *gin.Context) {
 			"gedApprovalComment": req.Comments,
 			"gedApprover":        userObjID,
 			"status":             "Approved", // Only now is it truly approved
+			"stage":              4,          // Final stage - fully approved
 			"updatedAt":          now,
 		},
 	}
