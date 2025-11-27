@@ -6,7 +6,7 @@ import ProgressBar from "../../Employee/Dashboard/progressBar";
 function HRDashboard() {
   const [latestLeave, setLatestLeave] = useState(null);
 
-  const stages = ["ED", "GED"];
+  const stages = ["ED", "HR", "GED"];
   const currentStage = latestLeave?.stage || 0;
 
   return (
