@@ -44,7 +44,7 @@ function AdminCards() {
           icon={<Home size={18} />}
           color="bg-green-500"
         />
-        <ResponsiveContainer width="100%" height={125}>
+        {/* <ResponsiveContainer width="90%" height={15}>
           <PieChart>
             <Pie
               data={pieData}
@@ -52,7 +52,7 @@ function AdminCards() {
               nameKey="name"
               cx="50%"
               cy="50%"
-              outerRadius={100}
+              outerRadius={10}
               label
             >
               {pieData.map((entry, index) => (
@@ -68,7 +68,7 @@ function AdminCards() {
             />
             <Legend />
           </PieChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer> */}
       </div>
     </div>
   );

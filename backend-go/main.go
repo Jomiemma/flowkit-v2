@@ -87,7 +87,7 @@ func main() {
 	// Get port from environment
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "5000"
+		port = "5001"
 	}
 
 	// Start server - bind to 0.0.0.0 to allow both localhost and network access

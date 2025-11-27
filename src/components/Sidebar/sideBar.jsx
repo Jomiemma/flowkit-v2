@@ -2,13 +2,14 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiHome, FiLogOut } from "react-icons/fi";
 import { User, Calendar } from "lucide-react";
+import { MdCheck } from "react-icons/md";
 
 const Sidebar = ({ role = "employee" }) => {
   const navigate = useNavigate();
 
   const employeeNav = [
     { name: "Dashboard", icon: <FiHome size={20} />, path: "/dashboard" },
-    { name: "Leave Management", icon: <Calendar size={20} />, path: "/leave" },
+    { name: "Apply Leave", icon: <Calendar size={20} />, path: "/leave" },
     { name: "Profile", icon: <User size={20} />, path: "/profile" },
   ];
 
@@ -25,19 +26,30 @@ const Sidebar = ({ role = "employee" }) => {
   const hodNav = [
     { name: "Dashboard", icon: <FiHome size={20} />, path: "/hod" },
     {
-      name: "Leave Approvals",
+      name: "Manage Requests",
+      icon: <MdCheck size={20} />,
+      path: "/hod/approval",
+    },
+    {
+      name: "Apply Leave",
       icon: <Calendar size={20} />,
-      path: "/hod/approvals",
+      path: "/hod/leave-application",
     },
     { name: "Profile", icon: <User size={20} />, path: "/hod/profile" },
+
   ];
 
   const hrNav = [
     { name: "Dashboard", icon: <FiHome size={20} />, path: "/hr" },
     {
-      name: "Leave Approvals",
+      name: "Manage Requests",
+      icon: <MdCheck size={20} />,
+      path: "/hr/approval",
+    },
+    {
+      name: "Apply Leave",
       icon: <Calendar size={20} />,
-      path: "/hr/approvals",
+      path: "/hr/leave-application",
     },
     { name: "Profile", icon: <User size={20} />, path: "/hr/profile" },
   ];
@@ -45,11 +57,13 @@ const Sidebar = ({ role = "employee" }) => {
   const gedNav = [
     { name: "Dashboard", icon: <FiHome size={20} />, path: "/ged" },
     {
-      name: "Leave Approvals",
+      name: "Manage Requests",
       icon: <Calendar size={20} />,
-      path: "/ged/approvals",
+      path: "/ged/approval",
     },
     { name: "Profile", icon: <User size={20} />, path: "/ged/profile" },
+    
+
   ];
 
   let navItems = employeeNav;
@@ -67,8 +81,11 @@ const Sidebar = ({ role = "employee" }) => {
 
   return (
     <div className="w-[220px] h-screen bg-blue-600 text-white p-4 flex flex-col">
-      <h2 className="text-xl font-bold mb-6">BBC Leave</h2>
-      <nav className="flex flex-col space-y-4">
+      <div className="flex justify-center mr-6">
+        <img src="/src/assets/bbc-logo.png" className="w-[110px]" />
+      </div>
+
+      <nav className="flex flex-col space-y-4 mt-6">
         {navItems.map((item) => (
           <NavLink
             key={item.name}

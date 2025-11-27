@@ -5,10 +5,10 @@ const getApiBaseUrl = () => {
   if (import.meta.env.VITE_API_URL) {
     return import.meta.env.VITE_API_URL;
   }
-  
+
   // Otherwise, use the current host (works for both localhost and network IP)
   const currentHost = window.location.hostname;
-  return `http://${currentHost}:5000/api`;
+  return `http://${currentHost}:5001/api`;
 };
 
 const API_BASE_URL = getApiBaseUrl();

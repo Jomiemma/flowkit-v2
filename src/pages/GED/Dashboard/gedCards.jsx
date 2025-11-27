@@ -83,28 +83,21 @@ function GEDCards() {
           icon={<Home size={18} />}
           color="bg-green-500"
         />
-        <ResponsiveContainer width="100%" height={125}>
+        <ResponsiveContainer width="100%" height={100}>
           <PieChart>
             <Pie
               data={pieData}
               dataKey="value"
-              nameKey="name"
               cx="50%"
               cy="50%"
-              overRadius={100}
-              label
+              outerRadius={40} // smaller radius
+              label={false} // labels will overflow in small charts
             >
               {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index]} />
               ))}
             </Pie>
-            <Tooltip
-              contentStyle={{
-                fontSize: "14px",
-                padding: "4px 8px",
-                borderRadius: "6px",
-              }}
-            />
+            <Tooltip />
             <Legend />
           </PieChart>
         </ResponsiveContainer>

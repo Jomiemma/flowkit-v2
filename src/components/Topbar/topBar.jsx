@@ -33,7 +33,7 @@ const Topbar = ({ role = "employee" }) => {
 
   return (
     <header className="w-full bg-white shadow px-4 py-3 flex justify-between items-center">
-      <div className="text-xl font-semibold">BBC Leave Management</div>
+      <div className="text-2xl font-semibold">BBC Leave Management</div>
 
       <div className="flex items-center gap-4">
         <Link

@@ -30,6 +30,8 @@ import GEDLayout from "./layouts/gedLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import HodLeaveApp from "./pages/HOD/LeaveApp/HodLeaveApp";
+import HrLeaveApp from "./pages/HR/LeaveApp/HRLeaveApp";
 
 const App = () => {
   return (
@@ -115,11 +117,21 @@ const App = () => {
             }
           />
           <Route
-            path="/hod/approvals"
+            path="/hod/approval"
             element={
               <ProtectedRoute>
                 <HODLayout>
                   <HODApprovals />
+                </HODLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/hod/leave-application"
+            element={
+              <ProtectedRoute>
+                <HODLayout>
+                  <HodLeaveApp />
                 </HODLayout>
               </ProtectedRoute>
             }
@@ -147,11 +159,21 @@ const App = () => {
             }
           />
           <Route
-            path="/hr/approvals"
+            path="/hr/approval"
             element={
               <ProtectedRoute>
                 <HRLayout>
                   <HRApprovals />
+                </HRLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/hr/leave-application"
+            element={
+              <ProtectedRoute>
+                <HRLayout>
+                  <HrLeaveApp />
                 </HRLayout>
               </ProtectedRoute>
             }
@@ -179,7 +201,7 @@ const App = () => {
             }
           />
           <Route
-            path="/ged/approvals"
+            path="/ged/approval"
             element={
               <ProtectedRoute>
                 <GEDLayout>

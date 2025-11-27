@@ -19,7 +19,6 @@ function ProgressBar({ stages, currentStage }) {
 
           {stages.map((stage, index) => {
             const stageNumber = index + 1;
-            const isActive = stageNumber <= currentStage;
             const isCompleted = stageNumber < currentStage;
             const isCurrent = stageNumber === currentStage;
 
@@ -33,7 +32,7 @@ function ProgressBar({ stages, currentStage }) {
                     isCompleted
                       ? "bg-green-500 shadow-lg shadow-green-200"
                       : isCurrent
-                      ? "bg-green-500 ring-4 ring-green-200 scale-110"
+                      ? "bg-yellow-500 ring-4 ring-yellow-200 scale-110"
                       : "bg-gray-300"
                   }`}
                 >
@@ -57,14 +56,22 @@ function ProgressBar({ stages, currentStage }) {
                 <div className="mt-3 text-center">
                   <p
                     className={`text-sm font-medium ${
-                      isActive ? "text-green-600" : "text-gray-400"
+                      isCompleted
+                        ? "text-green-500"
+                        : isCurrent
+                        ? "text-yellow-600"
+                        : "text-gray-400"
                     }`}
                   >
                     {stage}
                   </p>
                   <p
                     className={`text-xs mt-1 ${
-                      isActive ? "text-green-500" : "text-gray-400"
+                      isCompleted
+                        ? "text-green-500"
+                        : isCurrent
+                        ? "text-yellow-600"
+                        : "text-gray-400"
                     }`}
                   >
                     {isCompleted

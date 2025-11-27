@@ -9,7 +9,7 @@ import InputField from "./../../../components/Reusables/inputFields";
 import { leaveAPI, userAPI, getUser } from "./../../../services/api";
 import { toast } from "react-toastify";
 
-const Modal = forwardRef(({ onLeaveCreated }, ref) => {
+const Modal = forwardRef(({ onLeaveCreated, showReliever = true }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [leaveId, setLeaveId] = useState(null);
@@ -36,15 +36,13 @@ const Modal = forwardRef(({ onLeaveCreated }, ref) => {
         setFromDate(leaveData.fromDate?.split("T")[0] || "");
         setToDate(leaveData.toDate?.split("T")[0] || "");
         setReason(leaveData.reason || "");
-        // Handle reliever - it could be an object or just an ID
         setReliever(leaveData.reliever?.id || leaveData.reliever || "");
       } else {
-        // Create mode
         setEditMode(false);
         setLeaveId(null);
         resetForm();
       }
-      fetchRelievers();
+      if (showReliever) fetchRelievers();
     },
     close: () => {
       setIsOpen(false);
@@ -127,7 +125,7 @@ const Modal = forwardRef(({ onLeaveCreated }, ref) => {
       return;
     }
 
-    if (!reliever) {
+    if (showReliever && !reliever) {
       toast.error("Please select a reliever");
       return;
     }
@@ -141,7 +139,7 @@ const Modal = forwardRef(({ onLeaveCreated }, ref) => {
         fromDate,
         toDate,
         reason,
-        reliever,
+        ...(showReliever && { reliever }), // only include reliever if shown
       };
 
       let response;
@@ -266,21 +264,24 @@ const Modal = forwardRef(({ onLeaveCreated }, ref) => {
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="font-medium">Select Reliever</label>
-            <select
-              value={reliever}
-              onChange={(e) => setReliever(e.target.value)}
-              className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">-- Choose a reliever --</option>
-              {relievers.map((rel) => (
-                <option key={rel.id} value={rel.id}>
-                  {rel.firstName} {rel.lastName} ({rel.department})
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Conditionally render reliever field */}
+          {showReliever && (
+            <div className="flex flex-col gap-2">
+              <label className="font-medium">Select Reliever</label>
+              <select
+                value={reliever}
+                onChange={(e) => setReliever(e.target.value)}
+                className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">-- Choose a reliever --</option>
+                {relievers.map((rel) => (
+                  <option key={rel.id} value={rel.id}>
+                    {rel.firstName} {rel.lastName} ({rel.department})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <button
             type="submit"

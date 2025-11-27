@@ -4,7 +4,7 @@ import Modal from "./modal";
 import { leaveAPI } from "./../../../services/api";
 import { toast } from "react-toastify";
 
-const LeaveTable = () => {
+const LeaveTable = ({ showReliever = true }) => {
   const [leaveHistory, setLeaveHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const modalRef = useRef();
@@ -87,10 +87,11 @@ const LeaveTable = () => {
         <table className="min-w-full text-sm text-left border-collapse mt-4">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50 text-gray-600 mb-8">
-              <th classmbame="py-3 px-4">Leave Type</th>
+              <th className="py-3 px-4">Leave Type</th>
               <th className="py-3 px-4">From</th>
               <th className="py-3 px-4">To</th>
               <th className="py-3 px-4">No. of Days</th>
+              {showReliever && <th className="py-3 px-4">Reliever</th>}
               <th className="py-3 px-4">Status</th>
               <th className="py-3 px-4 text-center">Action</th>
             </tr>
@@ -100,7 +101,7 @@ const LeaveTable = () => {
             {sortedLeaves.length === 0 ? (
               <tr>
                 <td
-                  colSpan="6"
+                  colSpan={showReliever ? "7" : "6"}
                   className="text-center py-8 text-gray-400 text-sm italic"
                 >
                   No leaves have been taken yet. Once you apply, your leave
@@ -125,6 +126,9 @@ const LeaveTable = () => {
                   <td className="py-3 px-4">{formatDate(leave.fromDate)}</td>
                   <td className="py-3 px-4">{formatDate(leave.toDate)}</td>
                   <td className="py-3 px-4">{leave.totalDays}</td>
+                  <td className="py-3 px-4 font-medium text-gray-700">
+                    {leave.reliever?.firstName} {leave.reliever?.lastName}
+                  </td>
 
                   <td
                     className={`py-3 px-4 font-semibold ${getStatusColor(
@@ -162,7 +166,11 @@ const LeaveTable = () => {
             )}
           </tbody>
         </table>
-        <Modal ref={modalRef} onLeaveCreated={handleLeaveCreated} />
+        <Modal
+          ref={modalRef}
+          onLeaveCreated={handleLeaveCreated}
+          showReliever={showReliever}
+        />
       </div>
     </>
   );

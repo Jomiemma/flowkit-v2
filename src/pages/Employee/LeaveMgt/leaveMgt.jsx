@@ -4,7 +4,7 @@ import LeaveTable from "./leaveTable";
 const LeaveMgt = () => {
   return (
     <div>
-      <LeaveTable />
+      <LeaveTable showReliever={true} />
     </div>
   );
 };
