@@ -27,8 +27,14 @@ function Signup() {
     e.preventDefault();
 
     // Validation
-    if (!formData.firstName || !formData.lastName || !formData.email || 
-        !formData.password || !formData.confirmPassword || !formData.department) {
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword ||
+      !formData.department
+    ) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -48,7 +54,7 @@ function Signup() {
     try {
       const { confirmPassword, ...registrationData } = formData;
       const response = await authAPI.register(registrationData);
-      
+
       if (response.success) {
         toast.success("Registration successful! Redirecting to dashboard...");
         setTimeout(() => navigate("/dashboard"), 1500);
@@ -63,38 +69,41 @@ function Signup() {
   return (
     <>
       <div className="logpage min-h-screen flex items-center justify-center bg-gray-50">
-        <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md space-y-6 text-base">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md space-y-6 text-base"
+        >
           <h2 className="text-2xl font-semibold text-center font-sans">
             Sign Up
           </h2>
           <div className="space-y-4">
-            <InputField 
-              label="First Name" 
+            <InputField
+              label="First Name"
               name="firstName"
-              placeholder="First Name" 
+              placeholder="First Name"
               value={formData.firstName}
               onChange={handleChange}
             />
-            <InputField 
-              label="Last Name" 
+            <InputField
+              label="Last Name"
               name="lastName"
-              placeholder="Last Name" 
+              placeholder="Last Name"
               value={formData.lastName}
               onChange={handleChange}
             />
-            <InputField 
-              label="Email Address" 
+            <InputField
+              label="Email Address"
               name="email"
               type="email"
-              placeholder="Email Address" 
+              placeholder="Email Address"
               value={formData.email}
               onChange={handleChange}
             />
-            <InputField 
-              label="Password" 
+            <InputField
+              label="Password"
               name="password"
               type="password"
-              placeholder="Password" 
+              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
             />
@@ -127,6 +136,7 @@ function Signup() {
                   { id: 7, name: "CUSTOMER SERVICE" },
                   { id: 8, name: "FIELD" },
                   { id: 9, name: "MARKETING" },
+                  { id: 10, name: "HUMAN RESOURCES" },
                 ].map((dept) => (
                   <option key={dept.id} value={dept.name}>
                     {dept.name}
